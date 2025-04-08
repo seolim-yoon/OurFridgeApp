@@ -11,4 +11,7 @@ sealed interface ScreenType {
 
     @Serializable
     data object Setting: ScreenType
+
+    @Serializable
+    data object AddIngredient: ScreenType
 }

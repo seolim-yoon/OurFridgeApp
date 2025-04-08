@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.example.ourfridgeapp.ui.navigation.BottomNavBar
 import com.example.ourfridgeapp.ui.navigation.NavHostScreen
-import com.example.ourfridgeapp.ui.navigation.TopAppBar
+import com.example.ourfridgeapp.ui.navigation.TopAppBarItem
 import com.example.ourfridgeapp.ui.theme.OurFridgeAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +23,10 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 Scaffold(
                     topBar = {
-                        TopAppBar()
+                        TopAppBarItem(
+                            onClickAddItem = {
+                            }
+                        )
                     },
                     bottomBar = {
                         BottomNavBar(

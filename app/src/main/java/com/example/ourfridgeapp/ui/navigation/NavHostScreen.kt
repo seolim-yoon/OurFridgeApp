@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.ourfridgeapp.ui.fridge.screen.AddIngredientScreen
 import com.example.ourfridgeapp.ui.fridge.screen.FridgeScreen
 import com.example.ourfridgeapp.ui.home.screen.HomeScreen
 import com.example.ourfridgeapp.ui.setting.screen.SettingScreen
@@ -30,6 +31,10 @@ internal fun NavHostScreen(
 
         composable<ScreenType.Setting> {
             SettingScreen()
+        }
+
+        composable<ScreenType.AddIngredient> {
+            AddIngredientScreen()
         }
     }
 }

@@ -5,6 +5,7 @@ data class IngredientUiModel(
     val category: String,
     val name: String,
     val count: Int,
-    val expiration: String,
+    val purchaseDate: String,
+    val expirationDate: String,
     val dDay: Int
 )
