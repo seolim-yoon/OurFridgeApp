@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">OurFridgeApp</string>
+    <string name="app_name">우리집 냉장고</string>
+    <string name="screen_home">홈</string>
+    <string name="screen_fridge">냉장고</string>
+    <string name="screen_setting">설정</string>
+    <string name="ingredient_count">(%d)</string>
+    <string name="d_day">D-%d</string>
 </resources>

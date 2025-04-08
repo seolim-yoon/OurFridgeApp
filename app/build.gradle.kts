@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.serialization)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.compose.compiler)
@@ -8,12 +9,12 @@ plugins {
 
 android {
     namespace = "com.example.ourfridgeapp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.ourfridgeapp"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -62,6 +63,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.material.extended)
+    implementation(libs.kotlin.serialization)
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation)
     ksp(libs.hilt.compiler)

@@ -7,10 +7,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.example.ourfridgeapp.ui.navigation.BottomNavBar
+import com.example.ourfridgeapp.ui.navigation.NavHostScreen
+import com.example.ourfridgeapp.ui.navigation.TopAppBar
 import com.example.ourfridgeapp.ui.theme.OurFridgeAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,8 +20,22 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             OurFridgeAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-
+                val navController = rememberNavController()
+                Scaffold(
+                    topBar = {
+                        TopAppBar()
+                    },
+                    bottomBar = {
+                        BottomNavBar(
+                            navController = navController
+                        )
+                    },
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
+                    NavHostScreen(
+                        navController = navController,
+                        modifier = Modifier.padding(innerPadding)
+                    )
                 }
             }
         }
