@@ -18,7 +18,7 @@ import com.example.ourfridgeapp.util.FRIDGE_ITEM_TYPE
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-internal fun IngredientListItem(
+internal fun FridgeListItem(
     ingredients: List<IngredientUiModel>
 ) {
     CompositionLocalProvider(LocalOverscrollConfiguration provides null)  {
@@ -34,7 +34,7 @@ internal fun IngredientListItem(
                 contentType = { FRIDGE_ITEM_TYPE },
                 items = ingredients
             ) { ingredient ->
-                IngredientItem(
+                FridgeItem(
                     ingredient = ingredient
                 )
             }

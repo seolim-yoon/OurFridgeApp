@@ -1,4 +1,4 @@
-package com.example.ourfridgeapp.ui.fridge.item
+package com.example.ourfridgeapp.ui.ingredient.item
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

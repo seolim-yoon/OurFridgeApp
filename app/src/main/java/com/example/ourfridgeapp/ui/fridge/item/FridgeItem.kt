@@ -26,7 +26,7 @@ import com.example.ourfridgeapp.ui.theme.FridgeAppTheme
 import com.example.ourfridgeapp.ui.theme.OurFridgeAppTheme
 
 @Composable
-internal fun IngredientItem(
+internal fun FridgeItem(
     ingredient: IngredientUiModel
 ) {
     Column(
@@ -44,7 +44,7 @@ internal fun IngredientItem(
         IngredientTopItem(
             dDay = ingredient.dDay,
             name = ingredient.name,
-            count = ingredient.count
+            count = ingredient.quantity
         )
 
         IngredientBottomItem(
@@ -121,16 +121,17 @@ internal fun IngredientBottomItem(
 @Composable
 private fun PreviewIngredientItem() {
     OurFridgeAppTheme {
-        IngredientItem(
+        FridgeItem(
             ingredient = IngredientUiModel(
                 id = 0,
+                space = "",
                 category = "",
                 name = "애호박",
-                count = 2,
+                quantity = 2,
                 purchaseDate = "2025.04.01",
                 expirationDate = "2025.04.16",
-                dDay = 9
-
+                dDay = 9,
+                memo = ""
             )
         )
     }

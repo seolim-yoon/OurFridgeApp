@@ -6,5 +6,6 @@ import com.example.ourfridgeapp.ui.fridge.uimodel.IngredientUiModel
 
 data class FridgeUiState(
     val loadState: LoadState = LoadState.Success,
-    val historyList: List<IngredientUiModel> = emptyList()
+    val ingredientList: List<IngredientUiModel> = emptyList(),
 ) : UiState
+

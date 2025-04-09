@@ -3,7 +3,7 @@ package com.example.ourfridgeapp.ui.fridge.screen
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.ourfridgeapp.ui.fridge.item.IngredientListItem
+import com.example.ourfridgeapp.ui.fridge.item.FridgeListItem
 import com.example.ourfridgeapp.ui.fridge.item.SpaceTabRowItem
 import com.example.ourfridgeapp.ui.fridge.uimodel.IngredientUiModel
 import com.example.ourfridgeapp.ui.theme.OurFridgeAppTheme
@@ -16,15 +16,13 @@ internal fun FridgeScreen(
     ingredients: List<IngredientUiModel>,
 ) {
     Column {
-
         SpaceTabRowItem(
             tabs = tabs,
             selectedTabIndex = selectedTabIndex,
             onTabSelected = onTabSelected
         )
 
-
-        IngredientListItem(
+        FridgeListItem(
             ingredients = ingredients
         )
     }
@@ -42,12 +40,14 @@ private fun PreviewFridgeScreen() {
             ingredients = List(3) { index ->
                 IngredientUiModel(
                     id = index,
+                    space = "",
                     category = "",
                     name = "재료 ${index + 1}",
-                    count = 1 + index,
+                    quantity = 1 + index,
                     purchaseDate = "2025.04.01",
                     expirationDate = "2025.04.${16 + index}",
-                    dDay = 9 - index
+                    dDay = 9 - index,
+                    memo = "memo"
                 )
             }
         )
