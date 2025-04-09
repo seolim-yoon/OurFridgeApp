@@ -24,14 +24,15 @@ import com.example.ourfridgeapp.ui.theme.OurFridgeAppTheme
 @Composable
 internal fun TopAppBarItem(
     isBackNav: Boolean = false,
-    isFilter: Boolean = false,
+    isVisibleAddBtn: Boolean = false,
+    topBarTitle: String,
     onClickBackNav: () -> Unit = {},
     onClickAddItem: () -> Unit = {}
 ) {
     TopAppBar(
         title = {
             Text(
-                text = stringResource(R.string.app_name),
+                text = topBarTitle,
                 modifier = Modifier.padding(end = dimensionResource(R.dimen.padding_16dp)),
                 style = FridgeAppTheme.typography.title20
             )
@@ -50,7 +51,7 @@ internal fun TopAppBarItem(
             }
         },
         actions = {
-            if (isFilter) {
+            if (isVisibleAddBtn) {
                 Text(
                     text = stringResource(R.string.add_ingredient),
                     style = FridgeAppTheme.typography.title14,
@@ -71,7 +72,8 @@ private fun PreviewTopAppBarItem() {
     OurFridgeAppTheme {
         TopAppBarItem(
             isBackNav = true,
-            isFilter = true,
+            isVisibleAddBtn = true,
+            topBarTitle = "TopBar",
             onClickBackNav = {},
             onClickAddItem = {}
         )

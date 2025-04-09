@@ -6,7 +6,7 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
@@ -14,7 +14,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
-import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.ourfridgeapp.R
 import com.example.ourfridgeapp.util.ScreenType
 
@@ -23,7 +22,7 @@ internal fun BottomNavBar(
     navController: NavController
 ) {
     NavigationBar {
-        var selectedIndex by rememberSaveable { mutableStateOf(0) }
+        var selectedIndex by rememberSaveable { mutableIntStateOf(0) }
         val context = LocalContext.current
 
         navigationItemList.forEachIndexed { index, item ->

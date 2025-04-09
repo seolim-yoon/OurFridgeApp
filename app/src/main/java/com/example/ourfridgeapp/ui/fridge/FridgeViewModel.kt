@@ -7,7 +7,6 @@ import com.example.ourfridgeapp.mapper.IngredientUiMapper
 import com.example.ourfridgeapp.ui.fridge.contract.FridgeUiEffect
 import com.example.ourfridgeapp.ui.fridge.contract.FridgeUiEvent
 import com.example.ourfridgeapp.ui.fridge.contract.FridgeUiState
-import com.example.ourfridgeapp.ui.fridge.uimodel.IngredientUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -41,8 +40,6 @@ class FridgeViewModel @Inject constructor(
             }
         }
     }
-
-
 
     override fun onEvent(event: FridgeUiEvent) {
 

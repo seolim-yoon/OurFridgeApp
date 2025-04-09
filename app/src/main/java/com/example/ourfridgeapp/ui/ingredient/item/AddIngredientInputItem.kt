@@ -97,7 +97,7 @@ internal fun AddIngredientInputItem(
         ) {
             Text(
                 text = "2025.04.08", // TODO : 오늘 날짜
-                style = FridgeAppTheme.typography.body14,
+                style = FridgeAppTheme.typography.body16,
                 color = Color.Gray
             )
         }
@@ -109,7 +109,7 @@ internal fun AddIngredientInputItem(
         ) {
             Text(
                 text = "2025.04.08", // TODO : 버튼으로 변경
-                style = FridgeAppTheme.typography.body14,
+                style = FridgeAppTheme.typography.body16,
                 color = Color.Gray
             )
         }

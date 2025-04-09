@@ -10,6 +10,6 @@ internal fun TitleItem(
 ) {
     Text(
         text = text,
-        style = FridgeAppTheme.typography.body14
+        style = FridgeAppTheme.typography.body16
     )
 }

@@ -11,7 +11,7 @@ internal fun PlaceHolderItem(
 ) {
     Text(
         text = placeHolder,
-        style = FridgeAppTheme.typography.title14,
+        style = FridgeAppTheme.typography.title16,
         color = Color.Gray
     ) // TODO : 가운데 정렬
 }
