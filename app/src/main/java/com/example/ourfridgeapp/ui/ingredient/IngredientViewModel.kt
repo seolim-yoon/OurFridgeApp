@@ -2,6 +2,7 @@ package com.example.ourfridgeapp.ui.ingredient
 
 import android.util.Log
 import com.example.data.repository.FridgeRepository
+import com.example.ourfridgeapp.R
 import com.example.ourfridgeapp.base.BaseViewModel
 import com.example.ourfridgeapp.mapper.IngredientUiMapper
 import com.example.ourfridgeapp.ui.fridge.uimodel.DraftIngredient
@@ -10,6 +11,7 @@ import com.example.ourfridgeapp.ui.ingredient.contract.IngredientUiEffect
 import com.example.ourfridgeapp.ui.ingredient.contract.IngredientUiEvent
 import com.example.ourfridgeapp.ui.ingredient.contract.IngredientUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,16 +25,20 @@ class IngredientViewModel @Inject constructor(
         Log.e(this.javaClass.simpleName, throwable.message.toString())
     }
 
-    private fun insertIngredient(draftIngredient: DraftIngredient?) {
-        viewModelLaunch {
-            draftIngredient?.let {
+    private fun insertIngredient(draftIngredient: DraftIngredient) {
+        viewModelLaunch(Dispatchers.IO) {
+            draftIngredient.let {
                 fridgeRepository.upsertIngredient(ingredientUiMapper.mapToIngredient(draftIngredient))
             }
+        }
+        setEffect {
+            IngredientUiEffect.ShowSnackBar(R.string.msg_add_ingredient)
+            IngredientUiEffect.ExitScreenWithResult(R.string.msg_add_ingredient)
         }
     }
 
     private fun deleteIngredient(ingredientUiModel: IngredientUiModel) {
-        viewModelLaunch {
+        viewModelLaunch(Dispatchers.IO) {
             fridgeRepository.deleteIngredient(ingredientUiMapper.mapToIngredient(ingredientUiModel))
         }
     }
@@ -58,7 +64,7 @@ class IngredientViewModel @Inject constructor(
             is IngredientUiEvent.InputEvent.InputName -> {
                 setState {
                     copy(
-                        draftIngredient = draftIngredient?.copy(
+                        draftIngredient = draftIngredient.copy(
                             name = event.name
                         )
                     )
@@ -67,7 +73,7 @@ class IngredientViewModel @Inject constructor(
             is IngredientUiEvent.InputEvent.InputSpaceType -> {
                 setState {
                     copy(
-                        draftIngredient = draftIngredient?.copy(
+                        draftIngredient = draftIngredient.copy(
                             space = event.space
                         )
                     )
@@ -76,7 +82,7 @@ class IngredientViewModel @Inject constructor(
             is IngredientUiEvent.InputEvent.InputCategory -> {
                 setState {
                     copy(
-                        draftIngredient = draftIngredient?.copy(
+                        draftIngredient = draftIngredient.copy(
                             category = event.category
                         )
                     )
@@ -85,8 +91,8 @@ class IngredientViewModel @Inject constructor(
             is IngredientUiEvent.InputEvent.InputQuantity -> {
                 setState {
                     copy(
-                        draftIngredient = draftIngredient?.copy(
-                            quantity = event.quantity
+                        draftIngredient = draftIngredient.copy(
+                            quantity = draftIngredient.quantity + event.type.value
                         )
                     )
                 }
@@ -94,7 +100,7 @@ class IngredientViewModel @Inject constructor(
             is IngredientUiEvent.InputEvent.InputPurchaseDate -> {
                 setState {
                     copy(
-                        draftIngredient = draftIngredient?.copy(
+                        draftIngredient = draftIngredient.copy(
                             purchaseDate = event.date
                         )
                     )
@@ -103,7 +109,7 @@ class IngredientViewModel @Inject constructor(
             is IngredientUiEvent.InputEvent.InputExpirationDate -> {
                 setState {
                     copy(
-                        draftIngredient = draftIngredient?.copy(
+                        draftIngredient = draftIngredient.copy(
                             expirationDate = event.date
                         )
                     )
@@ -112,7 +118,7 @@ class IngredientViewModel @Inject constructor(
             is IngredientUiEvent.InputEvent.InputMemo -> {
                 setState {
                     copy(
-                        draftIngredient = draftIngredient?.copy(
+                        draftIngredient = draftIngredient.copy(
                             memo = event.memo
                         )
                     )

@@ -15,4 +15,5 @@
     <string name="memo">메모</string>
     <string name="select_category">카테고리 선택</string>
     <string name="save">저장하기</string>
+    <string name="msg_add_ingredient">재료가 냉장고에 저장되었습니다.</string>
 </resources>

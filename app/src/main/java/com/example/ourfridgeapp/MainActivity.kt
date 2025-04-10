@@ -7,6 +7,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -26,22 +29,18 @@ class MainActivity : ComponentActivity() {
         setContent {
             OurFridgeAppTheme {
                 val navController = rememberNavController()
-                val currentRoute =
-                    navController.currentBackStackEntryAsState().value?.destination?.route ?: ""
+                val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route?.split(".")?.last() ?: ""
+                val currentScreenType = ScreenType.fromRoute(currentRoute)
+
+                val snackBarHostState = remember { SnackbarHostState() }
 
                 Scaffold(
+                    snackbarHost = { SnackbarHost(hostState = snackBarHostState) },
                     topBar = {
                         TopAppBarItem(
-                            isBackNav = currentRoute.contains(ScreenType.AddIngredient.toString()),
-                            isVisibleAddBtn = currentRoute.contains(ScreenType.Fridge.toString()),
-                            topBarTitle = if (currentRoute.contains(ScreenType.Home.toString()))
-                                stringResource(R.string.app_name)
-                            else if (currentRoute.contains(ScreenType.Fridge.toString()))
-                                stringResource(R.string.screen_fridge)
-                            else if (currentRoute.contains(ScreenType.AddIngredient.toString()))
-                                stringResource(R.string.add_ingredient)
-                            else
-                                stringResource(R.string.screen_setting), // TODO : sealed class 내에서 가져오도록 구조 수정
+                            isBackNav = currentScreenType.isBackNavButton,
+                            isVisibleAddBtn = currentScreenType.isVisibleAddButton,
+                            topBarTitle = stringResource(currentScreenType.topBarTitleRes),
                             onClickBackNav = {
                                 navController.popBackStack()
                             },
@@ -61,6 +60,7 @@ class MainActivity : ComponentActivity() {
                 ) { innerPadding ->
                     NavHostScreen(
                         navController = navController,
+                        snackBarHostState = snackBarHostState,
                         modifier = Modifier.padding(innerPadding)
                     )
                 }

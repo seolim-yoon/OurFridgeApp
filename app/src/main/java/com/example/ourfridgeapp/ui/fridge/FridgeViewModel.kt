@@ -8,6 +8,7 @@ import com.example.ourfridgeapp.ui.fridge.contract.FridgeUiEffect
 import com.example.ourfridgeapp.ui.fridge.contract.FridgeUiEvent
 import com.example.ourfridgeapp.ui.fridge.contract.FridgeUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,7 +31,7 @@ class FridgeViewModel @Inject constructor(
     }
 
     private fun getAllIngredient() {
-        viewModelLaunch {
+        viewModelLaunch(Dispatchers.IO) {
             fridgeRepository.getAllIngredient().collect { ingredients ->
                 setState {
                     copy(

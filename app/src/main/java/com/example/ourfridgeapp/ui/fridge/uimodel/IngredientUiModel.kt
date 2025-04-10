@@ -13,11 +13,11 @@ data class IngredientUiModel(
 )
 
 data class DraftIngredient(
-    val space: String,
-    val category: String,
-    val name: String,
-    val quantity: Int,
-    val purchaseDate: String,
-    val expirationDate: String,
-    val memo: String
+    val space: String = "",
+    val category: String = "",
+    val name: String = "",
+    val quantity: Int = 0,
+    val purchaseDate: String = "",
+    val expirationDate: String = "",
+    val memo: String = ""
 )
