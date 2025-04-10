@@ -36,6 +36,7 @@ class IngredientUiMapper @Inject constructor() {
 
     fun mapToIngredient(draftIngredient: DraftIngredient): Ingredient =
         Ingredient(
+            id = draftIngredient.id,
             name = draftIngredient.name,
             purchaseDate = draftIngredient.purchaseDate,
             space = draftIngredient.space,
@@ -43,5 +44,29 @@ class IngredientUiMapper @Inject constructor() {
             quantity = draftIngredient.quantity,
             expirationDate = draftIngredient.expirationDate,
             memo = draftIngredient.memo
+        )
+
+    fun mapToDraftIngredient(ingredient: Ingredient): DraftIngredient =
+        DraftIngredient(
+            id = ingredient.id,
+            name = ingredient.name,
+            purchaseDate = ingredient.purchaseDate,
+            space = ingredient.space,
+            category = ingredient.category,
+            quantity = ingredient.quantity,
+            expirationDate = ingredient.expirationDate,
+            memo = ingredient.memo
+        )
+
+    fun mapToDraftIngredient(ingredientUiModel: IngredientUiModel): DraftIngredient =
+        DraftIngredient(
+            id = ingredientUiModel.id,
+            name = ingredientUiModel.name,
+            purchaseDate = ingredientUiModel.purchaseDate,
+            space = ingredientUiModel.space,
+            category = ingredientUiModel.category,
+            quantity = ingredientUiModel.quantity,
+            expirationDate = ingredientUiModel.expirationDate,
+            memo = ingredientUiModel.memo
         )
 }

@@ -11,6 +11,9 @@ interface IngredientDao {
     @Query("SELECT * FROM Ingredient")
     fun getAllIngredient(): Flow<List<Ingredient>>
 
+    @Query("SELECT * FROM Ingredient WHERE ingredient_id = :id")
+    fun getIngredientById(id: Int): Ingredient
+
     @Upsert
     fun upsertIngredient(ingredient: Ingredient)
 

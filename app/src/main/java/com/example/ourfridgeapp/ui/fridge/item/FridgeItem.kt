@@ -1,6 +1,7 @@
 package com.example.ourfridgeapp.ui.fridge.item
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,12 +28,16 @@ import com.example.ourfridgeapp.ui.theme.OurFridgeAppTheme
 
 @Composable
 internal fun FridgeItem(
-    ingredient: IngredientUiModel
+    ingredient: IngredientUiModel,
+    onClickIngredientItem: (IngredientUiModel) -> Unit
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_8dp)),
         modifier = Modifier
             .fillMaxWidth()
+            .clickable {
+                onClickIngredientItem(ingredient)
+            }
             .clip(
                 shape = RoundedCornerShape(dimensionResource(R.dimen.radius_12dp))
             )
@@ -132,7 +137,8 @@ private fun PreviewIngredientItem() {
                 expirationDate = "2025.04.16",
                 dDay = 9,
                 memo = ""
-            )
+            ),
+            onClickIngredientItem = {}
         )
     }
 }

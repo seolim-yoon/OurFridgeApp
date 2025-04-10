@@ -10,6 +10,8 @@ class FridgeRepository @Inject constructor(
 ) {
     suspend fun getAllIngredient(): Flow<List<Ingredient>> = fridgeLocalDataSource.getAllIngredient()
 
+    suspend fun getIngredientById(id: Int): Ingredient = fridgeLocalDataSource.getIngredientById(id)
+
     suspend fun upsertIngredient(ingredient: Ingredient) = fridgeLocalDataSource.upsertIngredient(ingredient)
 
     suspend fun deleteIngredient(ingredient: Ingredient) = fridgeLocalDataSource.deleteIngredient(ingredient)

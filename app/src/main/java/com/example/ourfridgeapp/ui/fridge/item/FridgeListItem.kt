@@ -19,7 +19,8 @@ import com.example.ourfridgeapp.util.FRIDGE_ITEM_TYPE
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun FridgeListItem(
-    ingredients: List<IngredientUiModel>
+    ingredients: List<IngredientUiModel>,
+    onClickIngredientItem: (IngredientUiModel) -> Unit
 ) {
     CompositionLocalProvider(LocalOverscrollConfiguration provides null)  {
         LazyVerticalGrid(
@@ -35,7 +36,8 @@ internal fun FridgeListItem(
                 items = ingredients
             ) { ingredient ->
                 FridgeItem(
-                    ingredient = ingredient
+                    ingredient = ingredient,
+                    onClickIngredientItem = onClickIngredientItem
                 )
             }
         }

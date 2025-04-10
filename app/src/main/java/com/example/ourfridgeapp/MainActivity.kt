@@ -1,6 +1,7 @@
 package com.example.ourfridgeapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -19,6 +20,7 @@ import com.example.ourfridgeapp.ui.navigation.NavHostScreen
 import com.example.ourfridgeapp.ui.navigation.TopAppBarItem
 import com.example.ourfridgeapp.ui.theme.OurFridgeAppTheme
 import com.example.ourfridgeapp.util.ScreenType
+import com.example.ourfridgeapp.util.TopBarByScreenType
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,8 +32,10 @@ class MainActivity : ComponentActivity() {
             OurFridgeAppTheme {
                 val navController = rememberNavController()
                 val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route?.split(".")?.last() ?: ""
-                val currentScreenType = ScreenType.fromRoute(currentRoute)
+                val currentScreenType = TopBarByScreenType.getScreenType(currentRoute)
 
+                Log.w("seolim", "currentRoute : " + currentRoute)
+                Log.v("seolim", "currentScreenType : " + currentScreenType)
                 val snackBarHostState = remember { SnackbarHostState() }
 
                 Scaffold(
@@ -46,7 +50,7 @@ class MainActivity : ComponentActivity() {
                             },
                             onClickAddItem = {
                                 navController.navigate(
-                                    route = ScreenType.AddIngredient
+                                    route = ScreenType.AddIngredient()
                                 )
                             }
                         )

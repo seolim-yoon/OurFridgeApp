@@ -1,10 +1,8 @@
 package com.example.ourfridgeapp.ui.navigation
 
-import android.util.Log
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -14,12 +12,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.toRoute
 import com.example.ourfridgeapp.ui.fridge.FridgeViewModel
 import com.example.ourfridgeapp.ui.fridge.screen.FridgeScreen
-import com.example.ourfridgeapp.ui.ingredient.screen.AddIngredientScreen
 import com.example.ourfridgeapp.ui.home.screen.HomeScreen
 import com.example.ourfridgeapp.ui.ingredient.IngredientViewModel
-import com.example.ourfridgeapp.ui.ingredient.contract.IngredientUiEffect
+import com.example.ourfridgeapp.ui.ingredient.screen.AddIngredientScreen
 import com.example.ourfridgeapp.ui.setting.screen.SettingScreen
 import com.example.ourfridgeapp.util.ScreenType
 import kotlinx.coroutines.launch
@@ -50,7 +48,14 @@ internal fun NavHostScreen(
                 onEvent = viewModel::onEvent,
                 tabs = listOf("냉장실", "냉동실", "김치냉장고", "팬트리"),
                 selectedTabIndex = 0,
-                onTabSelected = {}
+                onTabSelected = {},
+                onClickIngredientItem = { ingredient ->
+                    navController.navigate(
+                        route = ScreenType.AddIngredient(
+                            id = ingredient.id
+                        )
+                    )
+                }
             )
         }
 

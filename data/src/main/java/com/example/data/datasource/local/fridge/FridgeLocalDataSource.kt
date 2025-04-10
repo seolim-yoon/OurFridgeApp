@@ -6,6 +6,8 @@ import kotlinx.coroutines.flow.Flow
 interface FridgeLocalDataSource {
     suspend fun getAllIngredient(): Flow<List<Ingredient>>
 
+    suspend fun getIngredientById(id: Int): Ingredient
+
     suspend fun upsertIngredient(ingredient: Ingredient)
 
     suspend fun deleteIngredient(ingredient: Ingredient)

@@ -1,28 +1,46 @@
 package com.example.ourfridgeapp.ui.ingredient
 
 import android.util.Log
+import androidx.lifecycle.SavedStateHandle
+import androidx.navigation.toRoute
 import com.example.data.repository.FridgeRepository
 import com.example.ourfridgeapp.R
 import com.example.ourfridgeapp.base.BaseViewModel
 import com.example.ourfridgeapp.mapper.IngredientUiMapper
 import com.example.ourfridgeapp.ui.fridge.uimodel.DraftIngredient
-import com.example.ourfridgeapp.ui.fridge.uimodel.IngredientUiModel
 import com.example.ourfridgeapp.ui.ingredient.contract.IngredientUiEffect
 import com.example.ourfridgeapp.ui.ingredient.contract.IngredientUiEvent
 import com.example.ourfridgeapp.ui.ingredient.contract.IngredientUiState
+import com.example.ourfridgeapp.util.ScreenType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
 @HiltViewModel
 class IngredientViewModel @Inject constructor(
+    savedStateHandle: SavedStateHandle,
     private val fridgeRepository: FridgeRepository,
     private val ingredientUiMapper: IngredientUiMapper
-): BaseViewModel<IngredientUiState, IngredientUiEvent, IngredientUiEffect>() {
+) : BaseViewModel<IngredientUiState, IngredientUiEvent, IngredientUiEffect>() {
     override fun createInitialState(): IngredientUiState = IngredientUiState()
 
     override fun handleException(throwable: Throwable) {
         Log.e(this.javaClass.simpleName, throwable.message.toString())
+    }
+
+    init {
+        viewModelLaunch(Dispatchers.IO) {
+            val ingredient = fridgeRepository.getIngredientById(
+                id = savedStateHandle.toRoute<ScreenType.AddIngredient>().id
+            )
+            setState {
+                copy(
+                    draftIngredient = ingredientUiMapper.mapToDraftIngredient(
+                        ingredient
+                    )
+                )
+            }
+        }
     }
 
     private fun insertIngredient(draftIngredient: DraftIngredient) {
@@ -37,9 +55,9 @@ class IngredientViewModel @Inject constructor(
         }
     }
 
-    private fun deleteIngredient(ingredientUiModel: IngredientUiModel) {
+    private fun deleteIngredient(draftIngredient: DraftIngredient) {
         viewModelLaunch(Dispatchers.IO) {
-            fridgeRepository.deleteIngredient(ingredientUiMapper.mapToIngredient(ingredientUiModel))
+            fridgeRepository.deleteIngredient(ingredientUiMapper.mapToIngredient(draftIngredient))
         }
     }
 
@@ -50,7 +68,7 @@ class IngredientViewModel @Inject constructor(
             }
 
             is IngredientUiEvent.DeleteIngredient -> {
-                deleteIngredient(event.ingredientUiModel)
+                deleteIngredient(event.draftIngredient)
             }
 
             is IngredientUiEvent.InputEvent -> {
@@ -70,6 +88,7 @@ class IngredientViewModel @Inject constructor(
                     )
                 }
             }
+
             is IngredientUiEvent.InputEvent.InputSpaceType -> {
                 setState {
                     copy(
@@ -79,6 +98,7 @@ class IngredientViewModel @Inject constructor(
                     )
                 }
             }
+
             is IngredientUiEvent.InputEvent.InputCategory -> {
                 setState {
                     copy(
@@ -88,6 +108,7 @@ class IngredientViewModel @Inject constructor(
                     )
                 }
             }
+
             is IngredientUiEvent.InputEvent.InputQuantity -> {
                 setState {
                     copy(
@@ -97,6 +118,7 @@ class IngredientViewModel @Inject constructor(
                     )
                 }
             }
+
             is IngredientUiEvent.InputEvent.InputPurchaseDate -> {
                 setState {
                     copy(
@@ -106,6 +128,7 @@ class IngredientViewModel @Inject constructor(
                     )
                 }
             }
+
             is IngredientUiEvent.InputEvent.InputExpirationDate -> {
                 setState {
                     copy(
@@ -115,6 +138,7 @@ class IngredientViewModel @Inject constructor(
                     )
                 }
             }
+
             is IngredientUiEvent.InputEvent.InputMemo -> {
                 setState {
                     copy(

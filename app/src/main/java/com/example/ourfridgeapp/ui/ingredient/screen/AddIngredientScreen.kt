@@ -5,15 +5,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.SnackbarDuration
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,7 +25,6 @@ import com.example.ourfridgeapp.ui.ingredient.item.InputIngredientSpaceItem
 import com.example.ourfridgeapp.ui.theme.OurFridgeAppTheme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
-import kotlinx.coroutines.launch
 
 @Composable
 internal fun AddIngredientScreen(
@@ -45,10 +38,8 @@ internal fun AddIngredientScreen(
         effectFlow.collect { effect ->
             when(effect) {
                 is IngredientUiEffect.ShowSnackBar -> {
-                    Log.i("seolim", "show")
                 }
                 is IngredientUiEffect.ExitScreenWithResult -> {
-                    Log.i("seolim", "exit")
                     onSnackBarRequested(effect.msg)
 
                     onNavigationRequested(effect)
@@ -100,6 +91,17 @@ internal fun AddIngredientScreen(
                 onMemoChange = { onEvent(IngredientUiEvent.InputEvent.InputMemo(it)) }
             )
         }
+
+        Log.v("seolim", "id : " + state.draftIngredient.id)
+        if (state.draftIngredient.id != 0) {
+            ButtonItem(
+                text = stringResource(R.string.delete),
+                onClickButton = {
+                    onEvent(IngredientUiEvent.DeleteIngredient(state.draftIngredient))
+                }
+            )
+        }
+
 
         ButtonItem(
             text = stringResource(R.string.save),

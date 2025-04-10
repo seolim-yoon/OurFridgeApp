@@ -44,5 +44,6 @@ class FridgeViewModel @Inject constructor(
 
     override fun onEvent(event: FridgeUiEvent) {
 
+
     }
 }

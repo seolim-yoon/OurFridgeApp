@@ -16,7 +16,8 @@ internal fun FridgeScreen(
     onEvent: (FridgeUiEvent) -> Unit,
     tabs: List<String>,
     selectedTabIndex: Int,
-    onTabSelected: (Int) -> Unit
+    onTabSelected: (Int) -> Unit,
+    onClickIngredientItem: (IngredientUiModel) -> Unit
 ) {
     Column {
         SpaceTabRowItem(
@@ -26,7 +27,8 @@ internal fun FridgeScreen(
         )
 
         FridgeListItem(
-            ingredients = state.ingredientList
+            ingredients = state.ingredientList,
+            onClickIngredientItem = onClickIngredientItem
         )
     }
 }
@@ -41,7 +43,8 @@ private fun PreviewFridgeScreen() {
             onEvent = {},
             tabs = listOf("냉장", "냉동", "김치냉장고"),
             selectedTabIndex = 0,
-            onTabSelected = {  }
+            onTabSelected = {  },
+            onClickIngredientItem = {  }
         )
     }
 }

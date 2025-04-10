@@ -2,12 +2,11 @@ package com.example.ourfridgeapp.ui.ingredient.contract
 
 import com.example.ourfridgeapp.base.UiEvent
 import com.example.ourfridgeapp.ui.fridge.uimodel.DraftIngredient
-import com.example.ourfridgeapp.ui.fridge.uimodel.IngredientUiModel
 import com.example.ourfridgeapp.util.NumberCountType
 
 sealed interface IngredientUiEvent: UiEvent {
     data class InsertIngredient(val draftIngredient: DraftIngredient): IngredientUiEvent
-    data class DeleteIngredient(val ingredientUiModel: IngredientUiModel): IngredientUiEvent
+    data class DeleteIngredient(val draftIngredient: DraftIngredient): IngredientUiEvent
 
     sealed interface InputEvent: IngredientUiEvent {
         data class InputName(val name: String) : InputEvent

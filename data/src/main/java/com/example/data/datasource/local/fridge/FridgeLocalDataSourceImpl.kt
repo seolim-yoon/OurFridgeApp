@@ -11,6 +11,8 @@ class FridgeLocalDataSourceImpl @Inject constructor(
 
     override suspend fun getAllIngredient(): Flow<List<Ingredient>> = ingredientDao.getAllIngredient()
 
+    override suspend fun getIngredientById(id: Int): Ingredient = ingredientDao.getIngredientById(id)
+
     override suspend fun upsertIngredient(ingredient: Ingredient) = ingredientDao.upsertIngredient(ingredient)
 
     override suspend fun deleteIngredient(ingredient: Ingredient) = ingredientDao.deleteIngredient(ingredient)
