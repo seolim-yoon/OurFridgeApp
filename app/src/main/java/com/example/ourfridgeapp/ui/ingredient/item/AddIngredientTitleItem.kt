@@ -13,7 +13,7 @@ internal fun AddIngredientTitleItem(
     content: @Composable () -> Unit
 ) {
     Column(
-        verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_4dp))
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_8dp))
     ) {
         TitleItem(
             text = title

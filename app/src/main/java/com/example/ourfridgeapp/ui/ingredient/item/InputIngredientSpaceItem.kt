@@ -15,6 +15,6 @@ internal fun InputIngredientSpaceItem(
         tabs = listOf("냉장", "냉동", "김치냉장고"),
         selectedTabIndex = 0,
         onTabSelected = onSpaceSelect,
-        modifier = Modifier.padding(dimensionResource(R.dimen.padding_8dp))
+        modifier = Modifier.padding(vertical = dimensionResource(R.dimen.padding_8dp))
     )
 }

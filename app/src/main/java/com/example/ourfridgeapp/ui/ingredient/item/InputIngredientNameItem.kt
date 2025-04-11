@@ -33,6 +33,6 @@ internal fun InputIngredientNameItem(
         ),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = dimensionResource(R.dimen.padding_20dp))
+            .padding(top = dimensionResource(R.dimen.padding_16dp))
     )
 }

@@ -60,7 +60,7 @@ fun NumberCounter(
         Text(
             text = value.toString(),
             style = FridgeAppTheme.typography.body16,
-            modifier = Modifier.padding(dimensionResource(R.dimen.padding_16dp))
+            modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.padding_12dp))
         )
 
         CounterButtonItem(
@@ -72,7 +72,7 @@ fun NumberCounter(
                 }
             },
             onClick = {
-                if ( updateValue < range.last) {
+                if (updateValue < range.last) {
                     onChangeCount(NumberCountType.PLUS)
                 }
             }
@@ -123,7 +123,7 @@ fun CounterButtonItem(
                     isLongPressed = false
                 }
             }
-            .padding(dimensionResource(R.dimen.padding_4dp))
+            .padding(dimensionResource(R.dimen.padding_2dp))
     ) {
         Icon(
             imageVector = imageVector,

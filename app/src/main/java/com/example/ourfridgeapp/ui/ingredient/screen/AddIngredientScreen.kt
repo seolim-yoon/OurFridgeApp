@@ -1,7 +1,5 @@
 package com.example.ourfridgeapp.ui.ingredient.screen
 
-import android.util.Log
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -31,7 +29,6 @@ import com.example.ourfridgeapp.ui.ingredient.item.InputIngredientNameItem
 import com.example.ourfridgeapp.ui.ingredient.item.InputIngredientQuantityItem
 import com.example.ourfridgeapp.ui.ingredient.item.InputIngredientSpaceItem
 import com.example.ourfridgeapp.ui.theme.OurFridgeAppTheme
-import com.example.ourfridgeapp.util.CategoryType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
@@ -62,10 +59,10 @@ internal fun AddIngredientScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(dimensionResource(R.dimen.padding_20dp))
+            .padding(dimensionResource(R.dimen.padding_24dp))
     ) {
         Column(
-            verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_24dp)),
+            verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_20dp)),
             modifier = Modifier.weight(1f)
                 .verticalScroll(rememberScrollState())
         ) {
@@ -92,13 +89,11 @@ internal fun AddIngredientScreen(
             )
 
             InputIngredientDateItem(
-                title = stringResource(R.string.purchase_date),
-                onClickDateBtn = {}
+                title = stringResource(R.string.purchase_date)
             )
 
             InputIngredientDateItem(
-                title = stringResource(R.string.expired_date),
-                onClickDateBtn = {}
+                title = stringResource(R.string.expired_date)
             )
 
             InputIngredientMemoItem(
