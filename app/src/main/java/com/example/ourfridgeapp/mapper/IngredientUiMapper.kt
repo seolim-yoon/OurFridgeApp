@@ -3,6 +3,7 @@ package com.example.ourfridgeapp.mapper
 import com.example.data.datasource.local.fridge.database.Ingredient
 import com.example.ourfridgeapp.ui.fridge.uimodel.DraftIngredient
 import com.example.ourfridgeapp.ui.fridge.uimodel.IngredientUiModel
+import com.example.ourfridgeapp.util.CategoryType
 import javax.inject.Inject
 
 class IngredientUiMapper @Inject constructor() {
@@ -11,7 +12,7 @@ class IngredientUiMapper @Inject constructor() {
             IngredientUiModel(
                 id = ingredient.id,
                 space = ingredient.space,
-                category = ingredient.category,
+                category = CategoryType.fromValueByString(ingredient.category),
                 name = ingredient.name,
                 quantity = ingredient.quantity,
                 purchaseDate = ingredient.purchaseDate,
@@ -28,7 +29,7 @@ class IngredientUiMapper @Inject constructor() {
             name = ingredientUiModel.name,
             purchaseDate = ingredientUiModel.purchaseDate,
             space = ingredientUiModel.space,
-            category = ingredientUiModel.category,
+            category = ingredientUiModel.category.title,
             quantity = ingredientUiModel.quantity,
             expirationDate = ingredientUiModel.expirationDate,
             memo = ingredientUiModel.memo
@@ -40,7 +41,7 @@ class IngredientUiMapper @Inject constructor() {
             name = draftIngredient.name,
             purchaseDate = draftIngredient.purchaseDate,
             space = draftIngredient.space,
-            category = draftIngredient.category,
+            category = draftIngredient.category.title,
             quantity = draftIngredient.quantity,
             expirationDate = draftIngredient.expirationDate,
             memo = draftIngredient.memo
@@ -52,7 +53,7 @@ class IngredientUiMapper @Inject constructor() {
             name = ingredient.name,
             purchaseDate = ingredient.purchaseDate,
             space = ingredient.space,
-            category = ingredient.category,
+            category = CategoryType.fromValueByString(ingredient.category),
             quantity = ingredient.quantity,
             expirationDate = ingredient.expirationDate,
             memo = ingredient.memo

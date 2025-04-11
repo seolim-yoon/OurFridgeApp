@@ -59,6 +59,10 @@ class IngredientViewModel @Inject constructor(
         viewModelLaunch(Dispatchers.IO) {
             fridgeRepository.deleteIngredient(ingredientUiMapper.mapToIngredient(draftIngredient))
         }
+        setEffect {
+            IngredientUiEffect.ShowSnackBar(R.string.msg_delete_ingredient)
+            IngredientUiEffect.ExitScreenWithResult(R.string.msg_delete_ingredient)
+        }
     }
 
     override fun onEvent(event: IngredientUiEvent) {

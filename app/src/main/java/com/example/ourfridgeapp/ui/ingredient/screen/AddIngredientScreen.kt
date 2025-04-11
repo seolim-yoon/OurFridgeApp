@@ -1,12 +1,20 @@
 package com.example.ourfridgeapp.ui.ingredient.screen
 
 import android.util.Log
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -23,6 +31,7 @@ import com.example.ourfridgeapp.ui.ingredient.item.InputIngredientNameItem
 import com.example.ourfridgeapp.ui.ingredient.item.InputIngredientQuantityItem
 import com.example.ourfridgeapp.ui.ingredient.item.InputIngredientSpaceItem
 import com.example.ourfridgeapp.ui.theme.OurFridgeAppTheme
+import com.example.ourfridgeapp.util.CategoryType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
@@ -34,6 +43,8 @@ internal fun AddIngredientScreen(
     onSnackBarRequested: (Int) -> Unit,
     onNavigationRequested: (effect: IngredientUiEffect.ExitScreenWithResult) -> Unit
 ) {
+    var isBottomSheetOpen by rememberSaveable { mutableStateOf(false) }
+
     LaunchedEffect(Unit) {
         effectFlow.collect { effect ->
             when(effect) {
@@ -56,19 +67,23 @@ internal fun AddIngredientScreen(
         Column(
             verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_24dp)),
             modifier = Modifier.weight(1f)
+                .verticalScroll(rememberScrollState())
         ) {
 
             InputIngredientNameItem(
                 inputName = state.draftIngredient.name,
                 onNameChange = { onEvent(IngredientUiEvent.InputEvent.InputName(it)) },
-                )
+            )
 
             InputIngredientSpaceItem(
                 onSpaceSelect = { onEvent(IngredientUiEvent.InputEvent.InputSpaceType(it.toString())) },
             )
 
             InputIngredientCategoryItem(
-                onClickCategoryBtn = {}
+                currentCategory = state.draftIngredient.category,
+                onClickCategoryBtn = {
+                    isBottomSheetOpen = true
+                }
             )
 
             InputIngredientQuantityItem(
@@ -92,21 +107,39 @@ internal fun AddIngredientScreen(
             )
         }
 
-        Log.v("seolim", "id : " + state.draftIngredient.id)
-        if (state.draftIngredient.id != 0) {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_8dp))
+        ) {
+            if (state.draftIngredient.id != 0) {
+                ButtonItem(
+                    text = stringResource(R.string.delete),
+                    onClickButton = {
+                        onEvent(IngredientUiEvent.DeleteIngredient(state.draftIngredient))
+                    },
+                    modifier = Modifier.weight(1f)
+                )
+            }
+
+
             ButtonItem(
-                text = stringResource(R.string.delete),
+                text = stringResource(R.string.save),
                 onClickButton = {
-                    onEvent(IngredientUiEvent.DeleteIngredient(state.draftIngredient))
-                }
+                    onEvent(IngredientUiEvent.InsertIngredient(state.draftIngredient))
+                },
+                modifier = Modifier.weight(1f)
             )
         }
+    }
 
-
-        ButtonItem(
-            text = stringResource(R.string.save),
-            onClickButton = {
-                onEvent(IngredientUiEvent.InsertIngredient(state.draftIngredient))
+    if (isBottomSheetOpen) {
+        CategoryBottomSheet(
+            currentCategory = state.draftIngredient.category,
+            onClickCategoryItem = { category ->
+                isBottomSheetOpen = false
+                onEvent(IngredientUiEvent.InputEvent.InputCategory(category))
+            },
+            onDismissRequest = {
+                isBottomSheetOpen = false
             }
         )
     }

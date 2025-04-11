@@ -8,11 +8,12 @@ import androidx.compose.ui.Modifier
 @Composable
 internal fun ButtonItem(
     text: String,
-    onClickButton: () -> Unit
+    onClickButton: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Button(
         onClick = onClickButton,
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
     ) {
         TitleItem(
             text = text

@@ -25,6 +25,7 @@ import com.example.ourfridgeapp.R
 import com.example.ourfridgeapp.ui.fridge.uimodel.IngredientUiModel
 import com.example.ourfridgeapp.ui.theme.FridgeAppTheme
 import com.example.ourfridgeapp.ui.theme.OurFridgeAppTheme
+import com.example.ourfridgeapp.util.CategoryType
 
 @Composable
 internal fun FridgeItem(
@@ -75,7 +76,7 @@ internal fun IngredientTopItem(
             modifier = Modifier.weight(1f)
         ) {
             Icon(
-                imageVector = Icons.Default.Face,
+                imageVector = Icons.Default.Face, // TODO : 카테고리 아이콘
                 contentDescription = null
             )
         }
@@ -130,7 +131,7 @@ private fun PreviewIngredientItem() {
             ingredient = IngredientUiModel(
                 id = 0,
                 space = "",
-                category = "",
+                category = CategoryType.DEFAULT,
                 name = "애호박",
                 quantity = 2,
                 purchaseDate = "2025.04.01",

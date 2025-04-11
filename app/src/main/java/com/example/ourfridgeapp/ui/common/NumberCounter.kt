@@ -59,7 +59,7 @@ fun NumberCounter(
 
         Text(
             text = value.toString(),
-            style = FridgeAppTheme.typography.body14,
+            style = FridgeAppTheme.typography.body16,
             modifier = Modifier.padding(dimensionResource(R.dimen.padding_16dp))
         )
 

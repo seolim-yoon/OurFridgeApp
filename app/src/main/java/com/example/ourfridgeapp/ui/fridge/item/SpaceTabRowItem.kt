@@ -31,7 +31,7 @@ internal fun SpaceTabRowItem(
                 text = {
                     Text(
                         text = tab,
-                        style = FridgeAppTheme.typography.title14
+                        style = FridgeAppTheme.typography.title16
                     )
                 }
             )

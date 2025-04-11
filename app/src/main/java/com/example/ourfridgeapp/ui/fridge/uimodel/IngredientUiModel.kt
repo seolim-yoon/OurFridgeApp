@@ -1,9 +1,11 @@
 package com.example.ourfridgeapp.ui.fridge.uimodel
 
+import com.example.ourfridgeapp.util.CategoryType
+
 data class IngredientUiModel(
     val id: Int = 0,
     val space: String = "",
-    val category: String = "",
+    val category: CategoryType = CategoryType.DEFAULT,
     val name: String = "",
     val quantity: Int = 0,
     val purchaseDate: String = "",
@@ -15,7 +17,7 @@ data class IngredientUiModel(
 data class DraftIngredient(
     val id: Int = 0,
     val space: String = "",
-    val category: String = "",
+    val category: CategoryType = CategoryType.DEFAULT,
     val name: String = "",
     val quantity: Int = 0,
     val purchaseDate: String = "",
