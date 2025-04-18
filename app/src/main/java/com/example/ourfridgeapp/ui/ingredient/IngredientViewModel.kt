@@ -12,6 +12,7 @@ import com.example.ourfridgeapp.ui.ingredient.contract.IngredientUiEffect
 import com.example.ourfridgeapp.ui.ingredient.contract.IngredientUiEvent
 import com.example.ourfridgeapp.ui.ingredient.contract.IngredientUiState
 import com.example.ourfridgeapp.util.ScreenType
+import com.example.ourfridgeapp.util.SpaceType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
@@ -97,7 +98,7 @@ class IngredientViewModel @Inject constructor(
                 setState {
                     copy(
                         draftIngredient = draftIngredient.copy(
-                            space = event.space
+                            space = SpaceType.fromValueById(event.space)
                         )
                     )
                 }

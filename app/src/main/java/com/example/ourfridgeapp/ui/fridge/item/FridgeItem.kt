@@ -1,5 +1,6 @@
 package com.example.ourfridgeapp.ui.fridge.item
 
+import android.widget.Space
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -26,6 +27,7 @@ import com.example.ourfridgeapp.ui.fridge.uimodel.IngredientUiModel
 import com.example.ourfridgeapp.ui.theme.FridgeAppTheme
 import com.example.ourfridgeapp.ui.theme.OurFridgeAppTheme
 import com.example.ourfridgeapp.util.CategoryType
+import com.example.ourfridgeapp.util.SpaceType
 
 @Composable
 internal fun FridgeItem(
@@ -130,7 +132,7 @@ private fun PreviewIngredientItem() {
         FridgeItem(
             ingredient = IngredientUiModel(
                 id = 0,
-                space = "",
+                space = SpaceType.FRIDGE,
                 category = CategoryType.DEFAULT,
                 name = "애호박",
                 quantity = 2,

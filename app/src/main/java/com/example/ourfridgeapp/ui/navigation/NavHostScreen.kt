@@ -42,13 +42,9 @@ internal fun NavHostScreen(
             val state by viewModel.state.collectAsStateWithLifecycle()
 
 
-
             FridgeScreen(
                 state = state,
                 onEvent = viewModel::onEvent,
-                tabs = listOf("냉장실", "냉동실", "김치냉장고", "팬트리"),
-                selectedTabIndex = 0,
-                onTabSelected = {},
                 onClickIngredientItem = { ingredient ->
                     navController.navigate(
                         route = ScreenType.AddIngredient(

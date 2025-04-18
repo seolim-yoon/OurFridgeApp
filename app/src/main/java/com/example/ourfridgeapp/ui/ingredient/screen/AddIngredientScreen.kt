@@ -73,7 +73,8 @@ internal fun AddIngredientScreen(
             )
 
             InputIngredientSpaceItem(
-                onSpaceSelect = { onEvent(IngredientUiEvent.InputEvent.InputSpaceType(it.toString())) },
+                selectedTabIndex = state.draftIngredient.space.id,
+                onSpaceSelect = { onEvent(IngredientUiEvent.InputEvent.InputSpaceType(it)) },
             )
 
             InputIngredientCategoryItem(

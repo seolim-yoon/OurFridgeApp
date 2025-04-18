@@ -11,6 +11,7 @@ import com.example.ourfridgeapp.ui.fridge.uimodel.IngredientUiModel
 import com.example.ourfridgeapp.ui.theme.FridgeAppTheme
 import com.example.ourfridgeapp.ui.theme.OurFridgeAppTheme
 
+// TODO : Fridge, Ingredient 두가지 타입으로 ui 분리
 @Composable
 internal fun SpaceTabRowItem(
     tabs: List<String>,
