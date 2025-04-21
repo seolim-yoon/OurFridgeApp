@@ -8,6 +8,8 @@ interface FridgeLocalDataSource {
 
     suspend fun getIngredientById(id: Int): Ingredient
 
+    suspend fun getIngredientBySpaceType(spaceType: String): Flow<List<Ingredient>>
+
     suspend fun upsertIngredient(ingredient: Ingredient)
 
     suspend fun deleteIngredient(ingredient: Ingredient)

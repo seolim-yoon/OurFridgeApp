@@ -7,6 +7,7 @@ import com.example.ourfridgeapp.mapper.IngredientUiMapper
 import com.example.ourfridgeapp.ui.fridge.contract.FridgeUiEffect
 import com.example.ourfridgeapp.ui.fridge.contract.FridgeUiEvent
 import com.example.ourfridgeapp.ui.fridge.contract.FridgeUiState
+import com.example.ourfridgeapp.util.SpaceType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
@@ -15,7 +16,7 @@ import javax.inject.Inject
 class FridgeViewModel @Inject constructor(
     private val fridgeRepository: FridgeRepository,
     private val ingredientUiMapper: IngredientUiMapper
-): BaseViewModel<FridgeUiState, FridgeUiEvent, FridgeUiEffect>() {
+) : BaseViewModel<FridgeUiState, FridgeUiEvent, FridgeUiEffect>() {
     override fun createInitialState(): FridgeUiState = FridgeUiState()
 
     override fun handleException(throwable: Throwable) {
@@ -32,17 +33,30 @@ class FridgeViewModel @Inject constructor(
 
     private fun getAllIngredient() {
         viewModelLaunch(Dispatchers.IO) {
-            fridgeRepository.getAllIngredient().collect { ingredients ->
-                setState {
-                    copy(
-                        ingredientList = ingredientUiMapper.mapToIngredientUiModelList(ingredients)
-                    )
+            fridgeRepository.getIngredientBySpaceType(currentState.spaceType.title)
+                .collect { ingredients ->
+                    setState {
+                        copy(
+                            ingredientList = ingredientUiMapper.mapToIngredientUiModelList(
+                                ingredients
+                            )
+                        )
+                    }
                 }
-            }
         }
     }
 
     override fun onEvent(event: FridgeUiEvent) {
+        when (event) {
+            is FridgeUiEvent.SelectSpaceType -> {
+                setState {
+                    copy(
+                        spaceType = SpaceType.fromValueByString(event.spaceType)
+                    )
+                }
+                getAllIngredient()
+            }
+        }
 
 
     }

@@ -35,8 +35,6 @@ class MainActivity : ComponentActivity() {
                 val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route?.split(".")?.last() ?: ""
                 val currentScreenType = TopBarByScreenType.getScreenType(currentRoute)
 
-                Log.w("seolim", "currentRoute : " + currentRoute)
-                Log.v("seolim", "currentScreenType : " + currentScreenType)
                 val snackBarHostState = remember { SnackbarHostState() }
 
                 Scaffold(

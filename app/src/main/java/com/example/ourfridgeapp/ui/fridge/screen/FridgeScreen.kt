@@ -15,6 +15,7 @@ import com.example.ourfridgeapp.ui.fridge.item.FridgeListItem
 import com.example.ourfridgeapp.ui.fridge.item.SpaceTabRowItem
 import com.example.ourfridgeapp.ui.fridge.uimodel.IngredientUiModel
 import com.example.ourfridgeapp.ui.theme.OurFridgeAppTheme
+import com.example.ourfridgeapp.util.SpaceType
 
 @Composable
 internal fun FridgeScreen(
@@ -23,13 +24,15 @@ internal fun FridgeScreen(
     onClickIngredientItem: (IngredientUiModel) -> Unit
 ) {
     var selectedTabIndex by rememberSaveable { mutableIntStateOf(0) }
+    val tabList = SpaceType.entries.map { it.title }
 
     Column {
         SpaceTabRowItem(
-            tabs = listOf("냉장실", "냉동실", "김치냉장고", "팬트리"), // TODO : 분리
+            tabs = tabList,
             selectedTabIndex = selectedTabIndex,
             onTabSelected = { idx ->
                 selectedTabIndex = idx
+                onEvent(FridgeUiEvent.SelectSpaceType(tabList[idx]))
             }
         )
 

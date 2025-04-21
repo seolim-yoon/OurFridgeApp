@@ -12,6 +12,8 @@ class FridgeRepository @Inject constructor(
 
     suspend fun getIngredientById(id: Int): Ingredient = fridgeLocalDataSource.getIngredientById(id)
 
+    suspend fun getIngredientBySpaceType(spaceType: String): Flow<List<Ingredient>> = fridgeLocalDataSource.getIngredientBySpaceType(spaceType)
+
     suspend fun upsertIngredient(ingredient: Ingredient) = fridgeLocalDataSource.upsertIngredient(ingredient)
 
     suspend fun deleteIngredient(ingredient: Ingredient) = fridgeLocalDataSource.deleteIngredient(ingredient)

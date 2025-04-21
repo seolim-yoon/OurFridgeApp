@@ -90,11 +90,15 @@ internal fun AddIngredientScreen(
             )
 
             InputIngredientDateItem(
-                title = stringResource(R.string.purchase_date)
+                title = stringResource(R.string.purchase_date),
+                date = state.draftIngredient.purchaseDate,
+                onSelectDate = { onEvent(IngredientUiEvent.InputEvent.InputPurchaseDate(it)) }
             )
 
             InputIngredientDateItem(
-                title = stringResource(R.string.expired_date)
+                title = stringResource(R.string.expired_date),
+                date = state.draftIngredient.expirationDate,
+                onSelectDate = { onEvent(IngredientUiEvent.InputEvent.InputExpirationDate(it)) }
             )
 
             InputIngredientMemoItem(

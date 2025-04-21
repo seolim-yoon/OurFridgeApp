@@ -1,5 +1,6 @@
 package com.example.ourfridgeapp.ui.fridge.item
 
+import android.util.Log
 import android.widget.Space
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -55,10 +56,19 @@ internal fun FridgeItem(
             count = ingredient.quantity
         )
 
-        IngredientBottomItem(
-            purchaseDate = ingredient.purchaseDate,
-            expirationDate = ingredient.expirationDate
-        )
+        Column(
+            verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_4dp))
+        ) {
+            IngredientBottomItem(
+                title = stringResource(R.string.purchase_date),
+                date = ingredient.purchaseDate
+            )
+
+            IngredientBottomItem(
+                title = stringResource(R.string.expired_date),
+                date = ingredient.expirationDate
+            )
+        }
     }
 }
 
@@ -85,42 +95,43 @@ internal fun IngredientTopItem(
 
         Text(
             text = stringResource(R.string.d_day, dDay),
-            style = FridgeAppTheme.typography.title16,
+            style = FridgeAppTheme.typography.title18,
             color = Color.Red // TODO : 주황빛으로
         )
     }
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_2dp)),
+        horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_4dp)),
         modifier = Modifier.fillMaxWidth()
     ) {
         Text(
             text = name,
-            style = FridgeAppTheme.typography.title14
+            style = FridgeAppTheme.typography.title16
         )
         Text(
             text = stringResource(R.string.ingredient_count, count),
-            style = FridgeAppTheme.typography.body14
+            style = FridgeAppTheme.typography.body16
         )
     }
 }
 
 @Composable
 internal fun IngredientBottomItem(
-    purchaseDate: String,
-    expirationDate: String
+    title: String,
+    date: String
 ) {
-    Column(
-        verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_4dp))
+    Row (
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_4dp))
     ) {
         Text(
-            text = stringResource(R.string.purchase_date, purchaseDate),
-            style = FridgeAppTheme.typography.body12
+            text = title,
+            style = FridgeAppTheme.typography.body14
         )
         Text(
-            text = stringResource(R.string.expired_date, expirationDate),
-            style = FridgeAppTheme.typography.body12
+            text = date,
+            style = FridgeAppTheme.typography.body14
         )
     }
 }

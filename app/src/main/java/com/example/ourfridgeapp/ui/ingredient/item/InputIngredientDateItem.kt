@@ -26,10 +26,13 @@ import java.time.LocalDateTime
 
 @Composable
 internal fun InputIngredientDateItem(
-    title: String
+    title: String,
+    date: String,
+    onSelectDate: (String) -> Unit
 ) {
     var showDatePicker by remember { mutableStateOf(false) }
     var selectedDateTime by remember { mutableStateOf(LocalDateTime.now()) }
+    onSelectDate(selectedDateTime.toLocalDate().toString())
 
     AddIngredientTitleItem(
         title = title
@@ -77,6 +80,7 @@ internal fun InputIngredientDateItem(
                             java.time.Instant.ofEpochMilli(selectedDateMillis),
                             java.time.ZoneId.systemDefault()
                         )
+                    onSelectDate(selectedDateTime.toLocalDate().toString())
                 }
                 showDatePicker = false
             },

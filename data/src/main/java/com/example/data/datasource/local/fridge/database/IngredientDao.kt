@@ -14,6 +14,9 @@ interface IngredientDao {
     @Query("SELECT * FROM Ingredient WHERE ingredient_id = :id")
     fun getIngredientById(id: Int): Ingredient
 
+    @Query("SELECT * FROM Ingredient WHERE space_type = :spaceType")
+    fun getIngredientBySpaceType(spaceType: String): Flow<List<Ingredient>>
+
     @Upsert
     fun upsertIngredient(ingredient: Ingredient)
 

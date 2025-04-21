@@ -20,7 +20,7 @@ data class DraftIngredient(
     val space: SpaceType = SpaceType.FRIDGE,
     val category: CategoryType = CategoryType.DEFAULT,
     val name: String = "",
-    val quantity: Int = 0,
+    val quantity: Int = 1,
     val purchaseDate: String = "",
     val expirationDate: String = "",
     val memo: String = ""

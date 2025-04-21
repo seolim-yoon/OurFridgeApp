@@ -3,6 +3,7 @@ package com.example.ourfridgeapp.ui.navigation
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -17,6 +18,7 @@ import com.example.ourfridgeapp.ui.fridge.FridgeViewModel
 import com.example.ourfridgeapp.ui.fridge.screen.FridgeScreen
 import com.example.ourfridgeapp.ui.home.screen.HomeScreen
 import com.example.ourfridgeapp.ui.ingredient.IngredientViewModel
+import com.example.ourfridgeapp.ui.ingredient.contract.IngredientUiEvent
 import com.example.ourfridgeapp.ui.ingredient.screen.AddIngredientScreen
 import com.example.ourfridgeapp.ui.setting.screen.SettingScreen
 import com.example.ourfridgeapp.util.ScreenType
@@ -41,7 +43,6 @@ internal fun NavHostScreen(
             val viewModel: FridgeViewModel = hiltViewModel()
             val state by viewModel.state.collectAsStateWithLifecycle()
 
-
             FridgeScreen(
                 state = state,
                 onEvent = viewModel::onEvent,
@@ -60,11 +61,20 @@ internal fun NavHostScreen(
         }
 
         composable<ScreenType.AddIngredient> {
+            val fridgeViewModel: FridgeViewModel = hiltViewModel(
+                viewModelStoreOwner = navController.getBackStackEntry(ScreenType.Fridge)
+            )
+            val fridgeState by fridgeViewModel.state.collectAsStateWithLifecycle()
+
             val viewModel: IngredientViewModel = hiltViewModel()
             val state by viewModel.state.collectAsStateWithLifecycle()
 
             val context = LocalContext.current
             val coroutineScope = rememberCoroutineScope()
+
+            LaunchedEffect(Unit) {
+                viewModel.onEvent(IngredientUiEvent.InputEvent.InputSpaceType(fridgeState.spaceType.id))
+            }
 
             AddIngredientScreen(
                 state = state,
