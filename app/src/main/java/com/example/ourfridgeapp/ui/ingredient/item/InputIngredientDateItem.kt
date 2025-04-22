@@ -22,7 +22,8 @@ import androidx.compose.ui.res.dimensionResource
 import com.example.ourfridgeapp.R
 import com.example.ourfridgeapp.ui.ingredient.screen.DatePickerScreen
 import com.example.ourfridgeapp.ui.theme.FridgeAppTheme
-import java.time.LocalDateTime
+import com.example.ourfridgeapp.util.parseToLocalDate
+import java.time.LocalDate
 
 @Composable
 internal fun InputIngredientDateItem(
@@ -31,9 +32,7 @@ internal fun InputIngredientDateItem(
     onSelectDate: (String) -> Unit
 ) {
     var showDatePicker by remember { mutableStateOf(false) }
-    var selectedDateTime by remember { mutableStateOf(LocalDateTime.now()) }
-
-    onSelectDate(selectedDateTime.toLocalDate().toString())
+    var selectedDate by remember { mutableStateOf(parseToLocalDate(date)) }
 
     AddIngredientTitleItem(
         title = title
@@ -49,7 +48,7 @@ internal fun InputIngredientDateItem(
             )
 
             Text(
-                text = selectedDateTime.toLocalDate().toString(),
+                text = selectedDate.toString(),
                 style = FridgeAppTheme.typography.body16,
                 color = Color.Gray,
                 modifier = Modifier
@@ -70,18 +69,18 @@ internal fun InputIngredientDateItem(
 
     if (showDatePicker) {
         DatePickerScreen(
-            selectedDateTime = selectedDateTime,
+            selectedDateTime = selectedDate,
             onDismissRequest = {
                 showDatePicker = false
             },
             onClickConfirm = { selectedDateMillis ->
                 if (selectedDateMillis !== null) {
-                    selectedDateTime =
-                        LocalDateTime.ofInstant(
+                    selectedDate =
+                        LocalDate.ofInstant(
                             java.time.Instant.ofEpochMilli(selectedDateMillis),
                             java.time.ZoneId.systemDefault()
                         )
-                    onSelectDate(selectedDateTime.toLocalDate().toString())
+                    onSelectDate(selectedDate.toString())
                 }
                 showDatePicker = false
             },

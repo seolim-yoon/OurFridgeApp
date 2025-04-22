@@ -14,19 +14,19 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.example.ourfridgeapp.R
 import com.example.ourfridgeapp.ui.theme.FridgeAppTheme
-import java.time.LocalDateTime
+import java.time.LocalDate
 import java.time.ZoneId
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun DatePickerScreen(
-    selectedDateTime: LocalDateTime,
+    selectedDateTime: LocalDate,
     onDismissRequest: () -> Unit,
     onClickConfirm: (selectedDateMillis: Long?) -> Unit,
     onClickCancel: () -> Unit
 ) {
     val selectedDateInMillis =
-        selectedDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
+        selectedDateTime.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
 
     val datePickerState = rememberDatePickerState(
         initialSelectedDateMillis = selectedDateInMillis
