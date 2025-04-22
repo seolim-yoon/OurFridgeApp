@@ -82,6 +82,7 @@ internal fun CategoryBottomSheetItem(
             ) { category ->
                 CategoryItem(
                     title = category.title,
+                    image = category.imageRes,
                     isChecked = currentCategory == category,
                     onClickCategoryItem = onClickCategoryItem
 

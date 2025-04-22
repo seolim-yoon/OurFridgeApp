@@ -2,6 +2,7 @@ package com.example.ourfridgeapp.ui.fridge.item
 
 import android.util.Log
 import android.widget.Space
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Face
@@ -21,13 +23,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.ourfridgeapp.R
 import com.example.ourfridgeapp.ui.fridge.uimodel.IngredientUiModel
 import com.example.ourfridgeapp.ui.theme.FridgeAppTheme
 import com.example.ourfridgeapp.ui.theme.OurFridgeAppTheme
 import com.example.ourfridgeapp.util.CategoryType
+import com.example.ourfridgeapp.util.DateViewType
 import com.example.ourfridgeapp.util.SpaceType
 
 @Composable
@@ -51,8 +56,10 @@ internal fun FridgeItem(
             .padding(dimensionResource(R.dimen.padding_12dp))
     ) {
         IngredientTopItem(
+            viewType = ingredient.dateViewType,
             dDay = ingredient.dDay,
             name = ingredient.name,
+            categoryImage = ingredient.category.imageRes,
             count = ingredient.quantity
         )
 
@@ -74,8 +81,10 @@ internal fun FridgeItem(
 
 @Composable
 internal fun IngredientTopItem(
+    viewType: DateViewType,
     dDay: Int,
     name: String,
+    categoryImage: Int,
     count: Int
 ) {
     Row(
@@ -87,14 +96,16 @@ internal fun IngredientTopItem(
             contentAlignment = Alignment.CenterStart,
             modifier = Modifier.weight(1f)
         ) {
-            Icon(
-                imageVector = Icons.Default.Face, // TODO : 카테고리 아이콘
-                contentDescription = null
+            Image(
+                painter = painterResource(categoryImage),
+                contentDescription = null,
+                modifier = Modifier.size(40.dp, 40.dp)
             )
         }
 
+        val stringRes = if (viewType == DateViewType.REMAINING) R.string.d_day else R.string.elapsed_day
         Text(
-            text = stringResource(R.string.d_day, dDay),
+            text = stringResource(stringRes, dDay),
             style = FridgeAppTheme.typography.title18,
             color = Color.Red // TODO : 주황빛으로
         )

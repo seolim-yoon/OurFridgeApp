@@ -6,6 +6,9 @@ import com.example.ourfridgeapp.ui.fridge.uimodel.IngredientUiModel
 import com.example.ourfridgeapp.util.CategoryType
 import com.example.ourfridgeapp.util.DateViewType
 import com.example.ourfridgeapp.util.SpaceType
+import com.example.ourfridgeapp.util.parseToLocalDate
+import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 import javax.inject.Inject
 
 class IngredientUiMapper @Inject constructor() {
@@ -20,11 +23,26 @@ class IngredientUiMapper @Inject constructor() {
                 purchaseDate = ingredient.purchaseDate,
                 expirationDate = ingredient.expirationDate,
                 dateViewType = DateViewType.fromValueByIndex(ingredient.dateViewType),
-                dDay = 0,
+                dDay = getDayByViewType(ingredient.purchaseDate, ingredient.expirationDate, DateViewType.fromValueByIndex(ingredient.dateViewType)),
                 memo = ingredient.memo
 
             )
         }
+
+    private fun getDayByViewType(
+        purchaseDate: String,
+        expirationDate: String,
+        viewType: DateViewType
+    ): Int {
+        val today = LocalDate.now()
+        val dDay = ChronoUnit.DAYS.between(today, parseToLocalDate(expirationDate)).toInt()
+        val elapsed = ChronoUnit.DAYS.between(parseToLocalDate(purchaseDate), today).toInt()
+
+        return when (viewType) {
+            DateViewType.REMAINING -> dDay
+            DateViewType.ELAPSED -> elapsed
+        }
+    }
 
     fun mapToIngredient(ingredientUiModel: IngredientUiModel): Ingredient =
         Ingredient(

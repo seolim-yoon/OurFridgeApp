@@ -1,9 +1,11 @@
 package com.example.ourfridgeapp.ui.ingredient.item
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ImageSearch
 import androidx.compose.material3.Icon
@@ -13,10 +15,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import androidx.compose.ui.unit.dp
 import com.example.ourfridgeapp.R
 import com.example.ourfridgeapp.ui.theme.FridgeAppTheme
 import com.example.ourfridgeapp.ui.theme.OurFridgeAppTheme
@@ -25,6 +28,7 @@ import com.example.ourfridgeapp.util.CategoryType
 @Composable
 internal fun CategoryItem(
     title: String,
+    image: Int,
     isChecked: Boolean,
     onClickCategoryItem: (CategoryType) -> Unit,
 ) {
@@ -36,16 +40,16 @@ internal fun CategoryItem(
                 onClickCategoryItem(CategoryType.fromValueByString(title))
             }
     ) {
-        Icon(
-            imageVector = Icons.Default.ImageSearch,
-            contentDescription = null
+        Image(
+            painter = painterResource(image),
+            contentDescription = null,
+            modifier = Modifier.size(40.dp, 40.dp)
         )
 
         if (title.isNotBlank()) {
             Text(
                 text = title,
-                style = if (isChecked) FridgeAppTheme.typography.title14 else FridgeAppTheme.typography.body14,
-                color = if (isChecked) Color.Red else Color.Black
+                style = if (isChecked) FridgeAppTheme.typography.title14 else FridgeAppTheme.typography.body14
             )
         }
     }
@@ -57,6 +61,7 @@ private fun PreviewCategoryItem(@PreviewParameter(CategoryParameterProvider::cla
     OurFridgeAppTheme {
         CategoryItem(
             title = title,
+            image = R.drawable.vegetable,
             isChecked = false,
             onClickCategoryItem = {}
         )
