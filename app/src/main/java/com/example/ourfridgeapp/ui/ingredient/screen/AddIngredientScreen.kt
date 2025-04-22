@@ -28,6 +28,7 @@ import com.example.ourfridgeapp.ui.ingredient.item.InputIngredientMemoItem
 import com.example.ourfridgeapp.ui.ingredient.item.InputIngredientNameItem
 import com.example.ourfridgeapp.ui.ingredient.item.InputIngredientQuantityItem
 import com.example.ourfridgeapp.ui.ingredient.item.InputIngredientSpaceItem
+import com.example.ourfridgeapp.ui.ingredient.item.InputIngredientViewTypeItem
 import com.example.ourfridgeapp.ui.theme.OurFridgeAppTheme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
@@ -99,6 +100,11 @@ internal fun AddIngredientScreen(
                 title = stringResource(R.string.expired_date),
                 date = state.draftIngredient.expirationDate,
                 onSelectDate = { onEvent(IngredientUiEvent.InputEvent.InputExpirationDate(it)) }
+            )
+
+            InputIngredientViewTypeItem(
+                selectedViewType = state.draftIngredient.dateViewType,
+                onSelectedType = { onEvent(IngredientUiEvent.InputEvent.InputDateViewType(it)) }
             )
 
             InputIngredientMemoItem(

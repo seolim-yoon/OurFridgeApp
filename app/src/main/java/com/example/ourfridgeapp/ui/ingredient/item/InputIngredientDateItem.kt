@@ -32,6 +32,7 @@ internal fun InputIngredientDateItem(
 ) {
     var showDatePicker by remember { mutableStateOf(false) }
     var selectedDateTime by remember { mutableStateOf(LocalDateTime.now()) }
+
     onSelectDate(selectedDateTime.toLocalDate().toString())
 
     AddIngredientTitleItem(

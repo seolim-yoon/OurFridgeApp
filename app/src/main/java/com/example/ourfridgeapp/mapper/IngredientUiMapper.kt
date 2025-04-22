@@ -4,6 +4,7 @@ import com.example.data.datasource.local.fridge.database.Ingredient
 import com.example.ourfridgeapp.ui.fridge.uimodel.DraftIngredient
 import com.example.ourfridgeapp.ui.fridge.uimodel.IngredientUiModel
 import com.example.ourfridgeapp.util.CategoryType
+import com.example.ourfridgeapp.util.DateViewType
 import com.example.ourfridgeapp.util.SpaceType
 import javax.inject.Inject
 
@@ -18,6 +19,7 @@ class IngredientUiMapper @Inject constructor() {
                 quantity = ingredient.quantity,
                 purchaseDate = ingredient.purchaseDate,
                 expirationDate = ingredient.expirationDate,
+                dateViewType = DateViewType.fromValueByIndex(ingredient.dateViewType),
                 dDay = 0,
                 memo = ingredient.memo
 
@@ -33,6 +35,7 @@ class IngredientUiMapper @Inject constructor() {
             category = ingredientUiModel.category.title,
             quantity = ingredientUiModel.quantity,
             expirationDate = ingredientUiModel.expirationDate,
+            dateViewType = ingredientUiModel.dateViewType.index,
             memo = ingredientUiModel.memo
         )
 
@@ -45,6 +48,7 @@ class IngredientUiMapper @Inject constructor() {
             category = draftIngredient.category.title,
             quantity = draftIngredient.quantity,
             expirationDate = draftIngredient.expirationDate,
+            dateViewType = draftIngredient.dateViewType.index,
             memo = draftIngredient.memo
         )
 
@@ -57,6 +61,7 @@ class IngredientUiMapper @Inject constructor() {
             category = CategoryType.fromValueByString(ingredient.category),
             quantity = ingredient.quantity,
             expirationDate = ingredient.expirationDate,
+            dateViewType = DateViewType.fromValueByIndex(ingredient.dateViewType),
             memo = ingredient.memo
         )
 
@@ -69,6 +74,7 @@ class IngredientUiMapper @Inject constructor() {
             category = ingredientUiModel.category,
             quantity = ingredientUiModel.quantity,
             expirationDate = ingredientUiModel.expirationDate,
+            dateViewType = ingredientUiModel.dateViewType,
             memo = ingredientUiModel.memo
         )
 }

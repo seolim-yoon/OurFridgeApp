@@ -11,16 +11,18 @@ data class Ingredient(
     var id: Int = 0,
     @ColumnInfo(name = "ingredient_name")
     val name: String,
-    @ColumnInfo(name = "purchase_date")
-    val purchaseDate: String,
     @ColumnInfo(name = "space_type")
     val space: String,
     @ColumnInfo(name = "category_type")
     val category: String,
     @ColumnInfo(name = "quantity")
     val quantity: Int,
+    @ColumnInfo(name = "purchase_date")
+    val purchaseDate: String,
     @ColumnInfo(name = "expiration_date")
     val expirationDate: String,
+    @ColumnInfo(name = "date_view_type")
+    val dateViewType: Int,
     @ColumnInfo(name = "memo")
     val memo: String
 )

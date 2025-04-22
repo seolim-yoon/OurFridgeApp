@@ -3,8 +3,8 @@ package com.example.ourfridgeapp.ui.ingredient.contract
 import com.example.ourfridgeapp.base.UiEvent
 import com.example.ourfridgeapp.ui.fridge.uimodel.DraftIngredient
 import com.example.ourfridgeapp.util.CategoryType
+import com.example.ourfridgeapp.util.DateViewType
 import com.example.ourfridgeapp.util.NumberCountType
-import com.example.ourfridgeapp.util.SpaceType
 
 sealed interface IngredientUiEvent: UiEvent {
     data class InsertIngredient(val draftIngredient: DraftIngredient): IngredientUiEvent
@@ -17,6 +17,7 @@ sealed interface IngredientUiEvent: UiEvent {
         data class InputQuantity(val type: NumberCountType) : InputEvent
         data class InputPurchaseDate(val date: String) : InputEvent
         data class InputExpirationDate(val date: String) : InputEvent
+        data class InputDateViewType(val viewType: DateViewType) : InputEvent
         data class InputMemo(val memo: String) : InputEvent
     }
 }

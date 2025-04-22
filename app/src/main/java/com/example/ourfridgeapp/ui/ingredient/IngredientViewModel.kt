@@ -144,6 +144,16 @@ class IngredientViewModel @Inject constructor(
                 }
             }
 
+            is IngredientUiEvent.InputEvent.InputDateViewType -> {
+                setState {
+                    copy(
+                        draftIngredient = draftIngredient.copy(
+                            dateViewType = event.viewType
+                        )
+                    )
+                }
+            }
+
             is IngredientUiEvent.InputEvent.InputMemo -> {
                 setState {
                     copy(
