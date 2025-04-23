@@ -26,4 +26,10 @@
     <string name="expiration_remaining_description">유통기한까지 며칠 남았는지 확인할 수 있어요. (예: D-14)</string>
     <string name="purchase_elapsed_title">구매 후 경과일</string>
     <string name="purchase_elapsed_description">구매일을 기준으로 며칠이 지났는지 확인할 수 있어요. (예: 3일째)</string>
+    <string name="settings_notification">알림 설정</string>
+    <string name="settings_upcoming_features">업데이트 예정 기능</string>
+    <string name="settings_contact_us">문의하기</string>
+    <string name="settings_send_feedback">의견 보내기</string>
+    <string name="settings_terms_of_use">이용 약관</string>
+
 </resources>

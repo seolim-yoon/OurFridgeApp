@@ -65,6 +65,7 @@ internal fun AddIngredientScreen(
             verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_20dp)),
             modifier = Modifier.weight(1f)
                 .verticalScroll(rememberScrollState())
+                .padding(bottom = dimensionResource(R.dimen.padding_40dp))
         ) {
 
             InputIngredientNameItem(
