@@ -50,7 +50,6 @@ internal fun AddIngredientScreen(
                 }
                 is IngredientUiEffect.ExitScreenWithResult -> {
                     onSnackBarRequested(effect.msg)
-
                     onNavigationRequested(effect)
                 }
             }

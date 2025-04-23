@@ -10,6 +10,11 @@ import com.example.ourfridgeapp.ui.fridge.contract.FridgeUiState
 import com.example.ourfridgeapp.util.SpaceType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,10 +36,17 @@ class FridgeViewModel @Inject constructor(
         getAllIngredient()
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     private fun getAllIngredient() {
         viewModelLaunch(Dispatchers.IO) {
-            fridgeRepository.getIngredientBySpaceType(currentState.spaceType.title)
-                .collect { ingredients ->
+            state.map {
+                it.spaceType
+            }
+                .distinctUntilChanged()
+                .flatMapLatest { space ->
+                    fridgeRepository.getIngredientBySpaceType(currentState.spaceType.title)
+                }
+                .collectLatest { ingredients ->
                     setState {
                         copy(
                             ingredientList = ingredientUiMapper.mapToIngredientUiModelList(
@@ -54,7 +66,6 @@ class FridgeViewModel @Inject constructor(
                         spaceType = SpaceType.fromValueByString(event.spaceType)
                     )
                 }
-                getAllIngredient()
             }
         }
 

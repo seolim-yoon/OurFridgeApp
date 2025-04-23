@@ -32,7 +32,7 @@ internal fun InputIngredientDateItem(
     onSelectDate: (String) -> Unit
 ) {
     var showDatePicker by remember { mutableStateOf(false) }
-    var selectedDate by remember { mutableStateOf(parseToLocalDate(date)) }
+    var selectedDate by remember(date) { mutableStateOf(parseToLocalDate(date)) }
 
     AddIngredientTitleItem(
         title = title
