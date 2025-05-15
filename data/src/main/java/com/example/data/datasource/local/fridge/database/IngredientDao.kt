@@ -17,6 +17,9 @@ interface IngredientDao {
     @Query("SELECT * FROM Ingredient WHERE space_type = :spaceType")
     fun getIngredientBySpaceType(spaceType: String): Flow<List<Ingredient>>
 
+    @Query("SELECT * FROM Ingredient WHERE expiration_date < :time")
+    fun getIngredientExpired(time: Long): List<Ingredient>
+
     @Upsert
     fun upsertIngredient(ingredient: Ingredient)
 

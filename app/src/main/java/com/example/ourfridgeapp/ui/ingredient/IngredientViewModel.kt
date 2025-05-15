@@ -13,6 +13,7 @@ import com.example.ourfridgeapp.ui.ingredient.contract.IngredientUiEvent
 import com.example.ourfridgeapp.ui.ingredient.contract.IngredientUiState
 import com.example.ourfridgeapp.util.ScreenType
 import com.example.ourfridgeapp.util.SpaceType
+import com.example.ourfridgeapp.util.toLong
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
@@ -128,7 +129,7 @@ class IngredientViewModel @Inject constructor(
                 setState {
                     copy(
                         draftIngredient = draftIngredient.copy(
-                            purchaseDate = event.date
+                            purchaseDate = event.date.toLong()
                         )
                     )
                 }
@@ -138,7 +139,7 @@ class IngredientViewModel @Inject constructor(
                 setState {
                     copy(
                         draftIngredient = draftIngredient.copy(
-                            expirationDate = event.date
+                            expirationDate = event.date.toLong()
                         )
                     )
                 }

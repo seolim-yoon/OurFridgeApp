@@ -28,6 +28,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.ourfridgeapp.R
+import com.example.ourfridgeapp.ui.theme.Beige
 import com.example.ourfridgeapp.ui.theme.FridgeAppTheme
 import com.example.ourfridgeapp.ui.theme.OurFridgeAppTheme
 import com.example.ourfridgeapp.util.NumberCountType
@@ -100,7 +101,7 @@ fun CounterButtonItem(
         modifier = Modifier
             .background(
                 shape = RoundedCornerShape(dimensionResource(R.dimen.radius_8dp)),
-                color = Color.LightGray
+                color = Beige
             )
             .pointerInput(Unit) {
                 awaitEachGesture {

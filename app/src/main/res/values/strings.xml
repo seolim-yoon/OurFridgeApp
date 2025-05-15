@@ -6,6 +6,7 @@
     <string name="ingredient_count">(잔량 : %d개)</string>
     <string name="purchase_date">구매일자</string>
     <string name="expired_date">유통기한</string>
+    <string name="d_day_expired">D-Day</string>
     <string name="d_day">D-%d</string>
     <string name="elapsed_day">%d일 째</string>
     <string name="add_ingredient">재료 추가</string>

@@ -22,6 +22,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import com.example.ourfridgeapp.R
+import com.example.ourfridgeapp.ui.theme.Beige
 import com.example.ourfridgeapp.ui.theme.FridgeAppTheme
 import com.example.ourfridgeapp.ui.theme.OurFridgeAppTheme
 import com.example.ourfridgeapp.util.DateViewType
@@ -59,7 +60,7 @@ internal fun RadioButtonItem(
                 modifier = Modifier.fillMaxWidth()
                     .background(
                         shape = RoundedCornerShape(dimensionResource(R.dimen.radius_8dp)),
-                        color = Color.LightGray
+                        color = Beige
                     ).padding(
                         horizontal = dimensionResource(R.dimen.padding_16dp),
                         vertical = dimensionResource(R.dimen.padding_12dp)

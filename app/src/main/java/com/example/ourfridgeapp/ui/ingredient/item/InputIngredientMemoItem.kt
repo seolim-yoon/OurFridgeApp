@@ -11,6 +11,8 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.example.ourfridgeapp.R
 import com.example.ourfridgeapp.ui.common.PlaceHolderItem
+import com.example.ourfridgeapp.ui.theme.Beige
+import com.example.ourfridgeapp.ui.theme.FridgeAppTheme
 
 @Composable
 internal fun InputIngredientMemoItem(
@@ -28,8 +30,11 @@ internal fun InputIngredientMemoItem(
                     placeHolder = stringResource(R.string.msg_input_memo)
                 )
             },
+            textStyle = FridgeAppTheme.typography.body16,
             shape = RoundedCornerShape(dimensionResource(R.dimen.radius_12dp)),
             colors = TextFieldDefaults.colors(
+                focusedContainerColor = Beige,
+                unfocusedContainerColor = Beige,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
             ),

@@ -4,6 +4,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.sp
 
@@ -16,7 +17,8 @@ data class FridgeTypography(
     val title14: TextStyle = TextStyle.Default,
     val body16: TextStyle = TextStyle.Default,
     val body14: TextStyle = TextStyle.Default,
-    val body12: TextStyle = TextStyle.Default
+    val body12: TextStyle = TextStyle.Default,
+    val centerBody18: TextStyle = TextStyle.Default,
 )
 
 val Typography = FridgeTypography(
@@ -55,7 +57,13 @@ val Typography = FridgeTypography(
         fontSize = 12.sp,
         fontWeight = FontWeight.Normal,
         lineHeight = 18.sp
-    )
+    ),
+    centerBody18 = TextStyle(
+        fontSize = 18.sp,
+        fontWeight = FontWeight.Normal,
+        lineHeight = 24.sp,
+        textAlign = TextAlign.Center
+    ),
 )
 
 val LocalFridgeTypography = staticCompositionLocalOf {

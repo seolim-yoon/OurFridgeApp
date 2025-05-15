@@ -68,9 +68,11 @@ dependencies {
     implementation(libs.kotlin.serialization)
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation)
+    implementation(libs.hilt.work)
     ksp(libs.hilt.compiler)
     implementation(libs.coil.compose)
     implementation(libs.navigation)
+    implementation(libs.work.manager)
 
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))

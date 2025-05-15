@@ -29,11 +29,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.ourfridgeapp.R
 import com.example.ourfridgeapp.ui.fridge.uimodel.IngredientUiModel
+import com.example.ourfridgeapp.ui.theme.Beige
 import com.example.ourfridgeapp.ui.theme.FridgeAppTheme
 import com.example.ourfridgeapp.ui.theme.OurFridgeAppTheme
+import com.example.ourfridgeapp.ui.theme.Red
 import com.example.ourfridgeapp.util.CategoryType
 import com.example.ourfridgeapp.util.DateViewType
 import com.example.ourfridgeapp.util.SpaceType
+import com.example.ourfridgeapp.util.toLocalDateTime
 
 @Composable
 internal fun FridgeItem(
@@ -51,7 +54,7 @@ internal fun FridgeItem(
                 shape = RoundedCornerShape(dimensionResource(R.dimen.radius_12dp))
             )
             .background(
-                color = Color.LightGray
+                color = Beige
             )
             .padding(dimensionResource(R.dimen.padding_12dp))
     ) {
@@ -68,12 +71,12 @@ internal fun FridgeItem(
         ) {
             IngredientBottomItem(
                 title = stringResource(R.string.purchase_date),
-                date = ingredient.purchaseDate
+                date = ingredient.purchaseDate.toLocalDateTime().toLocalDate().toString()
             )
 
             IngredientBottomItem(
                 title = stringResource(R.string.expired_date),
-                date = ingredient.expirationDate
+                date = ingredient.expirationDate.toLocalDateTime().toLocalDate().toString()
             )
         }
     }
@@ -105,9 +108,10 @@ internal fun IngredientTopItem(
 
         val stringRes = if (viewType == DateViewType.REMAINING) R.string.d_day else R.string.elapsed_day
         Text(
-            text = stringResource(stringRes, dDay),
+            text = if (dDay == 0) stringResource(R.string.d_day_expired
+            ) else stringResource(stringRes, dDay),
             style = FridgeAppTheme.typography.title18,
-            color = Color.Red // TODO : 주황빛으로
+            color = Red
         )
     }
 
@@ -158,8 +162,8 @@ private fun PreviewIngredientItem() {
                 category = CategoryType.DEFAULT,
                 name = "애호박",
                 quantity = 2,
-                purchaseDate = "2025.04.01",
-                expirationDate = "2025.04.16",
+                purchaseDate = 1231312L,
+                expirationDate = 123123L,
                 dDay = 9,
                 memo = ""
             ),

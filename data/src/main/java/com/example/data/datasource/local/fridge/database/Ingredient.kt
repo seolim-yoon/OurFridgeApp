@@ -18,9 +18,9 @@ data class Ingredient(
     @ColumnInfo(name = "quantity")
     val quantity: Int,
     @ColumnInfo(name = "purchase_date")
-    val purchaseDate: String,
+    val purchaseDate: Long,
     @ColumnInfo(name = "expiration_date")
-    val expirationDate: String,
+    val expirationDate: Long,
     @ColumnInfo(name = "date_view_type")
     val dateViewType: Int,
     @ColumnInfo(name = "memo")

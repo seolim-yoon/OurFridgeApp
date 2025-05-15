@@ -64,7 +64,7 @@ internal fun InputIngredientCategoryItem(
                         color = MaterialTheme.colorScheme.primary
                     )
                     .padding(
-                        vertical = dimensionResource(R.dimen.padding_6dp),
+                        vertical = dimensionResource(R.dimen.padding_8dp),
                         horizontal = dimensionResource(R.dimen.padding_12dp)
                     )
             )

@@ -6,8 +6,9 @@ import com.example.ourfridgeapp.ui.fridge.uimodel.IngredientUiModel
 import com.example.ourfridgeapp.util.CategoryType
 import com.example.ourfridgeapp.util.DateViewType
 import com.example.ourfridgeapp.util.SpaceType
-import com.example.ourfridgeapp.util.parseToLocalDate
+import com.example.ourfridgeapp.util.toLocalDateTime
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 import javax.inject.Inject
 
@@ -30,32 +31,19 @@ class IngredientUiMapper @Inject constructor() {
         }
 
     private fun getDayByViewType(
-        purchaseDate: String,
-        expirationDate: String,
+        purchaseDate: Long,
+        expirationDate: Long,
         viewType: DateViewType
     ): Int {
         val today = LocalDate.now()
-        val dDay = ChronoUnit.DAYS.between(today, parseToLocalDate(expirationDate)).toInt()
-        val elapsed = ChronoUnit.DAYS.between(parseToLocalDate(purchaseDate), today).toInt()
+        val dDay = ChronoUnit.DAYS.between(today, expirationDate.toLocalDateTime().toLocalDate()).toInt()
+        val elapsed = ChronoUnit.DAYS.between(purchaseDate.toLocalDateTime().toLocalDate(), today).toInt() + 1
 
         return when (viewType) {
             DateViewType.REMAINING -> dDay
             DateViewType.ELAPSED -> elapsed
         }
     }
-
-    fun mapToIngredient(ingredientUiModel: IngredientUiModel): Ingredient =
-        Ingredient(
-            id = ingredientUiModel.id,
-            name = ingredientUiModel.name,
-            purchaseDate = ingredientUiModel.purchaseDate,
-            space = ingredientUiModel.space.title,
-            category = ingredientUiModel.category.title,
-            quantity = ingredientUiModel.quantity,
-            expirationDate = ingredientUiModel.expirationDate,
-            dateViewType = ingredientUiModel.dateViewType.index,
-            memo = ingredientUiModel.memo
-        )
 
     fun mapToIngredient(draftIngredient: DraftIngredient): Ingredient =
         Ingredient(
@@ -81,18 +69,5 @@ class IngredientUiMapper @Inject constructor() {
             expirationDate = ingredient.expirationDate,
             dateViewType = DateViewType.fromValueByIndex(ingredient.dateViewType),
             memo = ingredient.memo
-        )
-
-    fun mapToDraftIngredient(ingredientUiModel: IngredientUiModel): DraftIngredient =
-        DraftIngredient(
-            id = ingredientUiModel.id,
-            name = ingredientUiModel.name,
-            purchaseDate = ingredientUiModel.purchaseDate,
-            space = ingredientUiModel.space,
-            category = ingredientUiModel.category,
-            quantity = ingredientUiModel.quantity,
-            expirationDate = ingredientUiModel.expirationDate,
-            dateViewType = ingredientUiModel.dateViewType,
-            memo = ingredientUiModel.memo
         )
 }

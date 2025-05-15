@@ -1,5 +1,6 @@
 package com.example.ourfridgeapp.ui.ingredient.item
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -21,18 +22,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import com.example.ourfridgeapp.R
 import com.example.ourfridgeapp.ui.ingredient.screen.DatePickerScreen
+import com.example.ourfridgeapp.ui.theme.Beige
+import com.example.ourfridgeapp.ui.theme.Brown
 import com.example.ourfridgeapp.ui.theme.FridgeAppTheme
-import com.example.ourfridgeapp.util.parseToLocalDate
+import com.example.ourfridgeapp.util.toLocalDateTime
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 @Composable
 internal fun InputIngredientDateItem(
     title: String,
-    date: String,
-    onSelectDate: (String) -> Unit
+    date: Long,
+    onSelectDate: (LocalDateTime) -> Unit
 ) {
     var showDatePicker by remember { mutableStateOf(false) }
-    var selectedDate by remember(date) { mutableStateOf(parseToLocalDate(date)) }
+    var selectedDate by remember(date) { mutableStateOf(date.toLocalDateTime()) }
 
     AddIngredientTitleItem(
         title = title
@@ -44,20 +48,20 @@ internal fun InputIngredientDateItem(
             Icon(
                 imageVector = Icons.Default.CalendarMonth,
                 contentDescription = null,
-                tint = Color.Gray
+                tint = Brown
             )
 
             Text(
-                text = selectedDate.toString(),
+                text = selectedDate.toLocalDate().toString(),
                 style = FridgeAppTheme.typography.body16,
-                color = Color.Gray,
+                color = Color.Black,
                 modifier = Modifier
                     .clickable {
                         showDatePicker = true
                     }
                     .background(
                         shape = RoundedCornerShape(dimensionResource(R.dimen.radius_8dp)),
-                        color = Color.LightGray
+                        color = Beige
                     )
                     .padding(
                         vertical = dimensionResource(R.dimen.padding_8dp),
@@ -68,19 +72,17 @@ internal fun InputIngredientDateItem(
     }
 
     if (showDatePicker) {
+        Log.d("seolim", "selectedDate : " + selectedDate)
         DatePickerScreen(
-            selectedDateTime = selectedDate,
+            selectedDate = selectedDate,
             onDismissRequest = {
                 showDatePicker = false
             },
             onClickConfirm = { selectedDateMillis ->
                 if (selectedDateMillis !== null) {
-                    selectedDate =
-                        LocalDate.ofInstant(
-                            java.time.Instant.ofEpochMilli(selectedDateMillis),
-                            java.time.ZoneId.systemDefault()
-                        )
-                    onSelectDate(selectedDate.toString())
+                    selectedDate = selectedDateMillis.toLocalDateTime()
+
+                    onSelectDate(selectedDate)
                 }
                 showDatePicker = false
             },
